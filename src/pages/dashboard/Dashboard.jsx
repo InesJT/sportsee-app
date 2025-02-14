@@ -3,12 +3,14 @@ import { useContext, useEffect, useState } from 'react';
 import UserContext from '/src/context.js';
 import { fetchUserInfo } from '../../services';
 
+import { DailyActivity } from '../../components';
+
 import './Dashboard.scss';
 
 const Dashboard = () => {
+  const userId = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [firstName, setFirstName] = useState('');
-  const userId = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,12 +26,19 @@ const Dashboard = () => {
       {loading ? (
         <span>Loading...</span>
       ) : (
-        <div className="greetings">
-          <p className="greetings--hello">
-            Bonjour <span className="primary-color">{firstName}</span>
-          </p>
-          <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
-        </div>
+        <>
+          <div className="greetings">
+            <p className="greetings--hello">
+              Bonjour <span className="primary-color">{firstName}</span>
+            </p>
+            <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
+          </div>
+          <div className="charts">
+            <div className="charts--left-col">
+              <DailyActivity />
+            </div>
+          </div>
+        </>
       )}
     </>
   );
