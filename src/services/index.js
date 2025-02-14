@@ -91,7 +91,7 @@ const fetchPerformance = async (userId) => {
 const fetchActivityKinds = async (userId) => {
   try {
     const performance = await fetchPerformance(userId);
-    return performance.kind;    
+    return performance.data;    
   } catch (error) {
     console.log('error occurred while fetching activity kinds', error);    
   }
