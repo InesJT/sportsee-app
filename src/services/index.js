@@ -65,10 +65,20 @@ const fetchActivityKinds = async (userId) => {
   }
 }
 
+const fetchKeyData = async (userId) => {
+  try {
+    const userData = await fetchUserData(userId);
+    return userData.keyData;    
+  } catch (error) {
+    console.log('error occurred while fetching key data', error);        
+  }
+}
+
 export {
   fetchUserInfo,
   fetchActivity,
   fetchSessionsLength,
   fetchScore,
   fetchActivityKinds,
+  fetchKeyData,
 };
