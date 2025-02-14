@@ -29,8 +29,18 @@ const fetchSessionsLength = async (userId) => {
   }
 }
 
+const fetchScore = async (userId) => {
+  try {
+    const userInfo = await fetchUserInfo(userId);
+    return userInfo.score || userInfo.todayScore;
+  } catch (error) {
+    console.log('error occurred while fetching Score', error);
+  }
+};
+
 export {
   fetchUserInfo,
   fetchActivity,
   fetchSessionsLength,
+  fetchScore,
 };
