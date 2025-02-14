@@ -7,7 +7,7 @@ const fetchUserInfo = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}`);
     return response.data.data.userInfos;
   } catch (error) {
-    console.log('error occurred while fetching User info ', error);
+    console.log('error occurred while fetching User info', error);
   }
 };
 
@@ -16,11 +16,21 @@ const fetchActivity = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/activity`);
     return response.data.data.sessions;
   } catch (error) {
-    console.log('error occurred while fetching User activities ', error);
+    console.log('error occurred while fetching User activities', error);
+  }
+}
+
+const fetchSessionsLength = async (userId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/user/${userId}/average-sessions`);
+    return response.data.data.sessions;
+  } catch (error) {
+    console.log('error occurred while fetching User sessions length', error);
   }
 }
 
 export {
   fetchUserInfo,
   fetchActivity,
+  fetchSessionsLength,
 };
