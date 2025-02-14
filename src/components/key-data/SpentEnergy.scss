@@ -1,0 +1,21 @@
+.spent-energy {
+  background: #fbfbfb;
+  border-radius: 5px;
+  padding: 32px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  &--number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #282d30;
+  }
+
+  &--name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #74798c;
+    line-height: 1.5rem;
+  }
+}

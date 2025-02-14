@@ -8,8 +8,6 @@ import Profile from '/src/pages/profile';
 import Settings from '/src/pages/settings';
 import Error404 from '/src/pages/error';
 
-import './App.scss';
-
 const App = () => {
   return (
     <BrowserRouter>
