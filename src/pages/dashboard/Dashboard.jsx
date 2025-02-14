@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import UserContext from '/src/context.js';
 import { fetchUserInfo } from '/src/services';
 
-import { DailyActivity, SessionDuration, ActivityKind } from '/src/components';
+import { ActivityKind, DailyActivity, Score, SessionDuration } from '/src/components';
 
 import './Dashboard.scss';
 
@@ -39,6 +39,7 @@ const Dashboard = () => {
               <div className="charts--small-charts">
                 <SessionDuration />
                 <ActivityKind />
+                <Score />
               </div>
             </div>
           </div>
