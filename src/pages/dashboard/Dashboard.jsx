@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 
 import UserContext from '/src/context.js';
-import { fetchUserInfo } from '../../services';
+import { fetchUserInfo } from '/src/services';
 
-import { DailyActivity } from '../../components';
+import { DailyActivity, SessionDuration } from '/src/components';
 
 import './Dashboard.scss';
 
@@ -36,6 +36,9 @@ const Dashboard = () => {
           <div className="charts">
             <div className="charts--left-col">
               <DailyActivity />
+              <div className="charts--small-charts">
+                <SessionDuration />
+              </div>
             </div>
           </div>
         </>

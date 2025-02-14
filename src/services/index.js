@@ -51,7 +51,7 @@ const fetchActivity = async (userId) => {
   }
 };
 
-const fetchSessionsLength = async (userId) => {
+const fetchSessionsDuration = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}/average-sessions`);
     return response.data.data.sessions;
@@ -109,7 +109,7 @@ const fetchKeyData = async (userId) => {
 export {
   fetchUserInfo,
   fetchActivity,
-  fetchSessionsLength,
+  fetchSessionsDuration,
   fetchScore,
   fetchActivityKinds,
   fetchKeyData,

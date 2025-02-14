@@ -1,0 +1,23 @@
+.session-duration-chart {
+  flex: 1;
+  background: #ff0101;
+  border-radius: 5px;
+  position: relative;
+
+  &--tooltip {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    font-weight: 500;
+    font-size: 0.7rem;
+  }
+
+  .chart-title {
+    z-index: 100;
+  }
+}
+
+.white-color {
+  color: #ffffff;
+}

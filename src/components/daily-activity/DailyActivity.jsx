@@ -20,7 +20,7 @@ const DailyActivity = () => {
         setData(activityData);
         setLoading(false);
       } catch (error) {
-        console.error('Failed to fetch user activity:', error);
+        console.error('Failed to fetch user activity', error);
       }
     };
 

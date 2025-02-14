@@ -18,6 +18,11 @@
     flex-direction: column;
     gap: 30px;
   }
+
+  &--small-charts {
+    display: flex;
+    gap: 30px;
+  }
 }
 
 .chart-title {
