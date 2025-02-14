@@ -1,14 +1,10 @@
-import { useContext } from 'react';
 import { Link } from 'react-router';
-
-import UserContext from '/src/context.js';
 
 import logo from '/src/assets/logo.svg';
 
 import './Header.scss';
 
 const Header = () => {
-  const userId = useContext(UserContext);
   return (
     <header className="header">
       <img src={logo} alt="SportSee" className="header--logo" />
@@ -18,7 +14,7 @@ const Header = () => {
             <Link to="/">Accueil</Link>
           </li>
           <li>
-            <Link to={`/user/${userId}`}>Profil</Link>
+            <Link to={`/profile`}>Profil</Link>
           </li>
           <li>
             <Link to="/settings">Réglages</Link>

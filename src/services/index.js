@@ -2,12 +2,29 @@ import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
+const fetchMockData = async () => {
+	try {
+		const response = await fetch("/mock.json");
+		if (!response.ok) throw new Error("Failed to load mock data");
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error("Error fetching mock data", error);
+		return null;
+	}
+};
+
 const fetchUserData = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}`);
     return response.data.data;
   } catch (error) {
-    console.log('error occurred while fetching User info', error);
+    if (error.code === 'ERR_NETWORK') {
+      const response = await fetchMockData();
+      return response.UserInformation.find((m) => m.id == userId);
+    } else {
+      console.log('error occurred while fetching User info', error);
+    }
   }
 };
 
@@ -25,7 +42,12 @@ const fetchActivity = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/activity`);
     return response.data.data.sessions;
   } catch (error) {
-    console.log('error occurred while fetching User activities', error);
+    if (error.code === 'ERR_NETWORK') {
+      const response = await fetchMockData();
+      return response.UserActivity.find((m) => m.id == userId);
+    } else {
+      console.log('error occurred while fetching User activities', error);
+    }
   }
 };
 
@@ -34,7 +56,12 @@ const fetchSessionsLength = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/average-sessions`);
     return response.data.data.sessions;
   } catch (error) {
-    console.log('error occurred while fetching User sessions length', error);
+    if (error.code === 'ERR_NETWORK') {
+      const response = await fetchMockData();
+      return response.UserAverageSessions.find((m) => m.id == userId);
+    } else {
+      console.log('error occurred while fetching User sessions length', error);
+    }
   }
 };
 
@@ -52,7 +79,12 @@ const fetchPerformance = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/performance`);
     return response.data.data;    
   } catch (error) {
-    console.log('error occurred while fetching Performance', error);
+    if (error.code === 'ERR_NETWORK') {
+      const response = await fetchMockData();
+      return response.UserPerformance.find((m) => m.id == userId);
+    } else {
+      console.log('error occurred while fetching Performance', error);
+    }
   }
 };
 

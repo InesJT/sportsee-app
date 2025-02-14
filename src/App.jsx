@@ -16,7 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
-          <Route path="user/:userId" element={<Profile />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="community" element={<Community />} />
           <Route path="*" element={<Error404 />} />
