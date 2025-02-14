@@ -1,0 +1,9 @@
+.greetings {
+  margin-bottom: 50px;
+
+  &--hello {
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+}
