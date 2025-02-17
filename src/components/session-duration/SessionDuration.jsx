@@ -48,7 +48,7 @@ const SessionDuration = () => {
   return (
     <>
       {loading ? (
-        <span>Loading...</span>
+        <span>Chargement...</span>
       ) : (
         <div className="session-duration-chart">
           <h2 className="chart-title">

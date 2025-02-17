@@ -23,7 +23,7 @@ const Dashboard = () => {
   return (
     <>
       {loading ? (
-        <span>Loading...</span>
+        <span>Chargement...</span>
       ) : (
         <>
           <div className="greetings">

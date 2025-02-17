@@ -36,7 +36,7 @@ const ActivityKind = () => {
   return (
     <>
       {loading ? (
-        <span>Loading...</span>
+        <span>Chargement...</span>
       ) : (
         <div className="activity-kind-chart">
           <ResponsiveContainer width="95%" height="95%">

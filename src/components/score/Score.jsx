@@ -34,7 +34,7 @@ const Score = () => {
   return (
     <>
       {loading ? (
-        <span>Loading...</span>
+        <span>Chargement...</span>
       ) : (
         <div className="score-chart">
           <h2 className="chart-title">Score</h2>

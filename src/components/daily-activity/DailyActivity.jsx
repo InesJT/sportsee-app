@@ -30,7 +30,7 @@ const DailyActivity = () => {
   return (
     <>
       {loading ? (
-        <span>Loading...</span>
+        <span>Chargement...</span>
       ) : (
         <div className="activity-chart">
           <h2 className="chart-title">Activité quotidienne</h2>

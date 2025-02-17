@@ -54,7 +54,7 @@ const KeyData = () => {
     fetchData();
   }, [userId]);
 
-  return <>{loading ? <span>Loading...</span> : keyDataList.map((data) => <SpentEnergy key={data.name} data={data} />)}</>;
+  return <>{loading ? <span>Chargement...</span> : keyDataList.map((data) => <SpentEnergy key={data.name} data={data} />)}</>;
 };
 
 export default KeyData;

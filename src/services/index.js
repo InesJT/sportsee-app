@@ -10,7 +10,7 @@ const fetchMockData = async () => {
 		return data;
 	} catch (error) {
 		console.error("Error fetching mock data", error);
-		return null;
+		throw new Error("Failed to load mock data");
 	}
 };
 
@@ -19,12 +19,9 @@ const fetchUserData = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}`);
     return response.data.data;
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
-      const response = await fetchMockData();
-      return response.UserInformation.find((m) => m.id == userId);
-    } else {
-      console.log('error occurred while fetching User info', error);
-    }
+    console.error("Could not fetch data from backend", error);
+    const response = await fetchMockData();
+    return response.UserInformation.find((m) => m.id == userId);
   }
 };
 
@@ -34,6 +31,7 @@ const fetchUserInfo = async (userId) => {
     return response.userInfos;
   } catch (error) {
     console.log('error occurred while fetching User info', error);
+    return null;
   }
 };
 
@@ -42,12 +40,15 @@ const fetchActivity = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/activity`);
     return response.data.data.sessions;
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    console.error("Could not fetch data from backend", error);
+    try {
       const response = await fetchMockData();
-      return response.UserActivity.find((m) => m.id == userId);
-    } else {
-      console.log('error occurred while fetching User activities', error);
-    }
+      const result = response.UserActivity.find((m) => m.userId == userId);
+      return result.sessions;
+    } catch (err) {
+      console.log('error occurred while fetching User activity', err);
+      return null;      
+    }    
   }
 };
 
@@ -56,11 +57,14 @@ const fetchSessionsDuration = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/average-sessions`);
     return response.data.data.sessions;
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    console.error("Could not fetch data from backend", error);
+    try {
       const response = await fetchMockData();
-      return response.UserAverageSessions.find((m) => m.id == userId);
-    } else {
-      console.log('error occurred while fetching User sessions length', error);
+      const result =  response.UserAverageSessions.find((m) => m.userId == userId);
+      return result.sessions;
+    } catch (err) {
+      console.log('error occurred while fetching Session duration', err);
+      return null;      
     }
   }
 };
@@ -70,7 +74,8 @@ const fetchScore = async (userId) => {
     const userData = await fetchUserData(userId);
     return userData.score || userData.todayScore;
   } catch (error) {
-    console.log('error occurred while fetching Score', error);
+    console.log('error occurred while fetching User score', error);
+    return null;
   }
 };
 
@@ -79,12 +84,14 @@ const fetchPerformance = async (userId) => {
     const response = await axios.get(`${BASE_URL}/user/${userId}/performance`);
     return response.data.data;    
   } catch (error) {
-    if (error.code === 'ERR_NETWORK') {
+    console.error("Could not fetch data from backend", error);
+    try {
       const response = await fetchMockData();
-      return response.UserPerformance.find((m) => m.id == userId);
-    } else {
-      console.log('error occurred while fetching Performance', error);
-    }
+      return response.UserPerformance.find((m) => m.userId == userId);
+    } catch (err) {
+      console.log('error occurred while fetching User performance', err);
+      return null;      
+    }      
   }
 };
 
@@ -93,7 +100,8 @@ const fetchActivityKinds = async (userId) => {
     const performance = await fetchPerformance(userId);
     return performance.data;    
   } catch (error) {
-    console.log('error occurred while fetching activity kinds', error);    
+    console.log('error occurred while fetching activity kinds', error);
+    return null;   
   }
 }
 
@@ -102,7 +110,8 @@ const fetchKeyData = async (userId) => {
     const userData = await fetchUserData(userId);
     return userData.keyData;    
   } catch (error) {
-    console.log('error occurred while fetching key data', error);        
+    console.log('error occurred while fetching Key data', error);
+    return null;       
   }
 }
 
