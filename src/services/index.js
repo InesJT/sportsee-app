@@ -21,7 +21,7 @@ const fetchUserData = async (userId) => {
   } catch (error) {
     console.error("Could not fetch data from backend", error);
     const response = await fetchMockData();
-    return response.UserInformation.find((m) => m.id == userId);
+    return response.UserInformation.find((m) => m.id === userId);
   }
 };
 
@@ -43,7 +43,7 @@ const fetchActivity = async (userId) => {
     console.error("Could not fetch data from backend", error);
     try {
       const response = await fetchMockData();
-      const result = response.UserActivity.find((m) => m.userId == userId);
+      const result = response.UserActivity.find((m) => m.userId === userId);
       return result.sessions;
     } catch (err) {
       console.log('error occurred while fetching User activity', err);
@@ -60,7 +60,7 @@ const fetchSessionsDuration = async (userId) => {
     console.error("Could not fetch data from backend", error);
     try {
       const response = await fetchMockData();
-      const result =  response.UserAverageSessions.find((m) => m.userId == userId);
+      const result =  response.UserAverageSessions.find((m) => m.userId === userId);
       return result.sessions;
     } catch (err) {
       console.log('error occurred while fetching Session duration', err);
@@ -87,7 +87,7 @@ const fetchPerformance = async (userId) => {
     console.error("Could not fetch data from backend", error);
     try {
       const response = await fetchMockData();
-      return response.UserPerformance.find((m) => m.userId == userId);
+      return response.UserPerformance.find((m) => m.userId === userId);
     } catch (err) {
       console.log('error occurred while fetching User performance', err);
       return null;      
