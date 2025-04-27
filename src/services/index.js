@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+import { UserData, UserActivity, UserAverageSessions, UserPerformance } from '../models';
 
 const fetchMockData = async () => {
 	try {
@@ -17,18 +18,17 @@ const fetchMockData = async () => {
 const fetchUserData = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}`);
-    return response.data.data;
+    return new UserData(response.data.data);
   } catch (error) {
     console.error("Could not fetch data from backend", error);
     const response = await fetchMockData();
-    return response.UserInformation.find((m) => m.id === userId);
+    return new UserData(response.UserInformation.find((m) => m.id === userId));
   }
 };
 
 const fetchUserInfo = async (userId) => {
   try {
-    const response = await fetchUserData(userId);
-    return response.userInfos;
+    return await fetchUserData(userId);
   } catch (error) {
     console.log('error occurred while fetching User info', error);
     return null;
@@ -38,13 +38,14 @@ const fetchUserInfo = async (userId) => {
 const fetchActivity = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}/activity`);
-    return response.data.data.sessions;
+    const activity = new UserActivity(response.data.data);
+    return activity.sessions;
   } catch (error) {
     console.error("Could not fetch data from backend", error);
     try {
       const response = await fetchMockData();
-      const result = response.UserActivity.find((m) => m.userId === userId);
-      return result.sessions;
+      const activity = new UserActivity(response.UserActivity.find((m) => m.userId === userId));
+      return activity.sessions;
     } catch (err) {
       console.log('error occurred while fetching User activity', err);
       return null;      
@@ -55,13 +56,14 @@ const fetchActivity = async (userId) => {
 const fetchSessionsDuration = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}/average-sessions`);
-    return response.data.data.sessions;
+    const average = new UserAverageSessions(response.data.data);
+    return average.sessions;
   } catch (error) {
     console.error("Could not fetch data from backend", error);
     try {
       const response = await fetchMockData();
-      const result =  response.UserAverageSessions.find((m) => m.userId === userId);
-      return result.sessions;
+      const average = new UserAverageSessions(response.UserAverageSessions.find((m) => m.userId === userId));
+      return average.sessions;
     } catch (err) {
       console.log('error occurred while fetching Session duration', err);
       return null;      
@@ -72,7 +74,7 @@ const fetchSessionsDuration = async (userId) => {
 const fetchScore = async (userId) => {
   try {
     const userData = await fetchUserData(userId);
-    return userData.score || userData.todayScore;
+    return userData.todayScore;
   } catch (error) {
     console.log('error occurred while fetching User score', error);
     return null;
@@ -82,12 +84,12 @@ const fetchScore = async (userId) => {
 const fetchPerformance = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/user/${userId}/performance`);
-    return response.data.data;    
+    return new UserPerformance(response.data.data);
   } catch (error) {
     console.error("Could not fetch data from backend", error);
     try {
       const response = await fetchMockData();
-      return response.UserPerformance.find((m) => m.userId === userId);
+      return new UserPerformance(response.UserPerformance.find((m) => m.userId === userId));
     } catch (err) {
       console.log('error occurred while fetching User performance', err);
       return null;      

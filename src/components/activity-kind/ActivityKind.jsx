@@ -39,8 +39,8 @@ const ActivityKind = () => {
         <span>Chargement...</span>
       ) : (
         <div className="activity-kind-chart">
-          <ResponsiveContainer width="95%" height="95%">
-            <RadarChart outerRadius="70%" data={data}>
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart outerRadius="40%" data={data}>
               <PolarGrid gridType="polygon" radialLines={false} stroke="#ffffff" />
               <PolarAngleAxis dataKey="activity" tick={{ fontSize: 12, fill: '#ffffff' }} />
               <Radar name="Performance" dataKey="value" fill="#ff0101" fillOpacity={0.7} />

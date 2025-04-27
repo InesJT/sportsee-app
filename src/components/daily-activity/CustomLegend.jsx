@@ -20,7 +20,7 @@ const CustomLegend = ({ payload }) => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            marginLeft: '30px',
+            marginLeft: '0px',
           }}
         >
           <div
@@ -28,7 +28,7 @@ const CustomLegend = ({ payload }) => {
               width: '8px',
               height: '8px',
               backgroundColor: entry.color,
-              marginRight: '10px',
+              marginRight: '8px',
               borderRadius: '50%',
             }}
           ></div>

@@ -8,7 +8,7 @@ import './index.scss';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <UserContext.Provider value={18}>
+    <UserContext.Provider value={12}>
       <App />
     </UserContext.Provider>
   </StrictMode>
