@@ -4,15 +4,6 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } fro
 import UserContext from '/src/context.js';
 import { fetchActivityKinds } from '/src/services';
 
-const kindToLabel = {
-  1: 'Cardio',
-  2: 'Énergie',
-  3: 'Endurance',
-  4: 'Force',
-  5: 'Vitesse',
-  6: 'Intensité',
-};
-
 import './ActivityKind.scss';
 
 const ActivityKind = () => {
@@ -22,11 +13,7 @@ const ActivityKind = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const rawData = await fetchActivityKinds(userId);
-      const kindsData = rawData.map((item) => ({
-        ...item,
-        activity: kindToLabel[item.kind],
-      }));
+      const kindsData = await fetchActivityKinds(userId);
       setData(kindsData);
       setLoading(false);
     };

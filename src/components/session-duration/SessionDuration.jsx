@@ -6,16 +6,6 @@ import { fetchSessionsDuration } from '/src/services';
 import CustomToolTip from './CustomToolTip';
 import CustomCursor from './CustomCursor';
 
-const numberToWeekday = {
-  1: 'L',
-  2: 'M',
-  3: 'M',
-  4: 'J',
-  5: 'V',
-  6: 'S',
-  7: 'D',
-};
-
 import './SessionDuration.scss';
 
 const SessionDuration = () => {
@@ -29,10 +19,7 @@ const SessionDuration = () => {
         const rawData = await fetchSessionsDuration(userId);
         const sessionsData = [
           { weekday: '', sessionLength: 0 }, // Dummy at the start of the chart
-          ...rawData.map((session) => ({
-            ...session,
-            weekday: numberToWeekday[session.day],
-          })),
+          ...rawData,
           { weekday: '', sessionLength: 0 }, // Dummy at the end of the chart
         ];
         setData(sessionsData);
